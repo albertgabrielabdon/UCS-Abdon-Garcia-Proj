@@ -99,7 +99,7 @@ def breadth_first_search(initial_state, goal_state):
     visited.add(tuple(initial_state))
     
     while frontier:
-        current_state, path = frontier.popleft() # dequeue the next state
+        current_state, path = frontier.popleft() # dequeue the next state (FIFO)
         
         if current_state == goal_state:
             #print("goal found")
@@ -111,8 +111,29 @@ def breadth_first_search(initial_state, goal_state):
                 visited.add(tuple(neighbor))
                 new_path = path + [neighbor]
                 frontier.append((neighbor, new_path))
+                
+def depth_first_search(initial_state, goal_state):
+    frontier = [(initial_state, [])]
+
+    visited = set()
+    
+    while frontier:
+        current_state, path = frontier.pop() # pop the next state (LIFO)
+
+        if current_state == goal_state:
+            #print("goal found")
+            return path
+        
+        visited.add(tuple(current_state))
+
+        neighbors = get_neighbors(current_state)
+        for neighbor in neighbors:
+            if tuple(neighbor) not in visited:
+                new_path = path + [neighbor]
+                frontier.append((neighbor, new_path))
 
     return None #no solution
+
 # , 3, 8, 5, 0, 2, 4, 7, 1]
 #goal_state = [1, 2, 3, 4, 5, 6, 7, 8, 0]
 
@@ -131,12 +152,14 @@ while True:
     print_puzzle(goal_state)
 
     # Choose an algorithm
-    algorithm_choice = input("\nChoose an algorithm (ucs or bfs):")
+    algorithm_choice = input("\nChoose an algorithm (ucs, bfs, or dfs):")
     
     if algorithm_choice =='ucs':
         solution = uniform_cost_search(initial_state, goal_state)
     elif algorithm_choice =='bfs':
         solution = breadth_first_search(initial_state, goal_state)
+    elif algorithm_choice =='dfs':
+        solution = depth_first_search(initial_state, goal_state)
     else:
         print("Invalid choice")
         continue
