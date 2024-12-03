@@ -154,11 +154,11 @@ while True:
     # Choose an algorithm
     algorithm_choice = input("\nChoose an algorithm (ucs, bfs, or dfs):")
     
-    if algorithm_choice =='ucs':
+    if algorithm_choice.lower() =='ucs':
         solution = uniform_cost_search(initial_state, goal_state)
-    elif algorithm_choice =='bfs':
+    elif algorithm_choice.lower() =='bfs':
         solution = breadth_first_search(initial_state, goal_state)
-    elif algorithm_choice =='dfs':
+    elif algorithm_choice.lower() =='dfs':
         solution = depth_first_search(initial_state, goal_state)
     else:
         print("Invalid choice")
