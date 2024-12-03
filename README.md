@@ -4,7 +4,7 @@ Run csci111-v3-UCS.py.
 
 It will ask what goal state you want to input. Valid inputs are as follows:
 
-5 4 3 2 6 7 1 0 8 
+6 3 8 5 0 2 4 7 1
 
 0 8 7 6 5 4 3 2 1
 
